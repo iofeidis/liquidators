@@ -19,11 +19,6 @@ dt_obj_end = datetime.strptime(END_TIMESTAMP,'%d.%m.%Y %H:%M')
 start_timestamp = str(int(dt_obj_start.timestamp() * 1000))
 end_timestamp = str(int(dt_obj_end.timestamp() * 1000))
 
-# Preferred time interval
-# Options : m1, m5, m15, m30, h1, h2, h6, h12, d1
-# where m=minute, h=hour, d=day
-INTERVAL = "m15"
-
 url = f"http://api.coincap.io/v2/assets/{ASSET}/history?interval={INTERVAL}&start={start_timestamp}&end={end_timestamp}"
 
 payload={}

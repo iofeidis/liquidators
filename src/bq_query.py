@@ -1,11 +1,13 @@
 import csv, os
 from google.cloud import bigquery
 from event_signatures import EVENT_SIGNATURES
+from web3.auto import w3
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../bigquery_key.json"
 client = bigquery.Client()
 
 EVENT_SIGNATURE = EVENT_SIGNATURES['Aave_v3_liquidations']
+event_signature = w3.keccak(text=EVENT_SIGNATURE).hex()
 
 QUERY = \
 f"""
@@ -25,7 +27,7 @@ JOIN `bigquery-public-data.crypto_ethereum.blocks` AS blocks
   ON logs.block_number=blocks.number
 WHERE DATE(block_timestamp) < '2022-07-07' AND
       DATE(block_timestamp) > '2015-10-01' AND
-      topics[SAFE_OFFSET(0)] = '{EVENT_SIGNATURE}';
+      topics[SAFE_OFFSET(0)] = '{event_signature}';
 """
 
 FILE = "results/aave3_liquidations.csv"
