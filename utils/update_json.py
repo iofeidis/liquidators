@@ -1,9 +1,12 @@
 import json
 
-FILE = "utils/asset_addresses.json"
+EVENT_FILE = "utils/event_signatures.json"
+ASSET_FILE = "utils/asset_addresses.json"
 
-# Asset Addresses retrieved manually via etherscan.io
-ASSET_ADDRESSES = {
+"""
+Asset Addresses retrieved manually via etherscan.io
+"""
+ASSET_ADDRESSES = { 
     '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2': 'WETH',
     '0x514910771af9ca656af840dff83e8264ecf986ca': 'LINK',
     '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599': 'WBTC',
@@ -45,9 +48,30 @@ ASSET_ADDRESSES = {
     '0x03ab458634910aad20ef5f1c8ee96f1d6ac54919': 'RAI',
     '0xd46ba6d942050d489dbd938a2c909a5d5039a161': 'AMPL',
     '0xa693b19d2931d498c5b318df961919bb4aee87a5': 'UST',
-    '0x408e41876cccdc0f92210600ef50372656052a38': 'REN',   
+    '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee': 'ETH',
+    '0x80fb784b7ed66730e8b1dbd9820afd29931aab03': 'LEND',
+    '0x97dec872013f6b5fb443861090ad931542878126': 'USDC',
+    '0x2a1530c4c41db0b0b2bb646cb5eb1a67b7158667': 'DAI',
+    '0x1985365e9f78359a9b6ad760e32412f4a445e862': 'REP',
+}
+
+"""
+Event signatures retrieved by the corresponding smart contract
+Please name the events with the format : <protocol>_<version>_<event>
+"""
+EVENT_SIGNATURES = {
+    # https://github.com/aave/aave-v3-core/blob/e46341caf815edc268893f4f9398035f242375d9/contracts/interfaces/IPool.sol#L178
+    'Aave_v3_liquidations' : 'LiquidationCall(address,address,address,uint256,uint256,address,bool)',
+    # https://github.com/aave/aave-protocol/blob/4b4545fb583fd4f400507b10f3c3114f45b8a037/contracts/lendingpool/LendingPool.sol#L215
+    'Aave_v1_liquidations' : 'LiquidationCall(address,address,address,uint256,uint256,uint256,address,bool,uint256)',
 }
 
 if __name__=="__main__":
-    with open(FILE, 'w') as jsonfile:
+    """
+    Run this script to update the .json files if you
+    edited the values above
+    """
+    with open(ASSET_FILE, 'w') as jsonfile:
         json.dump(ASSET_ADDRESSES, jsonfile)
+    with open(EVENT_FILE, 'w') as jsonfile:
+        json.dump(EVENT_SIGNATURES, jsonfile)
