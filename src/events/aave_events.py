@@ -9,6 +9,9 @@ def get_aave_event(result, event_name):
     # Same as Aave v2 liquidations
     if event_name == 'Aave_v3_liquidations':
         
+        # HEADER = "transactionHash,userLiquidated,collateralAsset,debtAsset," + \
+        # "liquidator,debtToCover,liquidatedCollateralAmount,blockNumber"
+        
         collateral_asset = '0x' + result["topics"][1].hex().lstrip('0x').rjust(40,'0')
         debt_asset = '0x' + result["topics"][2].hex().lstrip('0x').rjust(40,'0')
         

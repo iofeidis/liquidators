@@ -64,6 +64,8 @@ EVENT_SIGNATURES = {
     'Aave_v3_liquidations' : 'LiquidationCall(address,address,address,uint256,uint256,address,bool)',
     # https://github.com/aave/aave-protocol/blob/4b4545fb583fd4f400507b10f3c3114f45b8a037/contracts/lendingpool/LendingPool.sol#L215
     'Aave_v1_liquidations' : 'LiquidationCall(address,address,address,uint256,uint256,uint256,address,bool,uint256)',
+    # https://docs.makerdao.com/miscellaneous/liquidations-1.2-system-deprecated/cat-detailed-documentation
+    'Maker_v1_Bite': 'Bite(bytes32,address,uint256,uint256,uint256,address,uint256)',
 }
 
 if __name__=="__main__":
