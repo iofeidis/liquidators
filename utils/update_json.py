@@ -53,6 +53,12 @@ ASSET_ADDRESSES = {
     '0x97dec872013f6b5fb443861090ad931542878126': 'USDC',
     '0x2a1530c4c41db0b0b2bb646cb5eb1a67b7158667': 'DAI',
     '0x1985365e9f78359a9b6ad760e32412f4a445e862': 'REP',
+    '0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b': 'CVX',
+    '0x111111111117dc0aa78b770fa6a738034120c302': '1INCH',
+    '0x27403B2756E9c2f436FB13e0B188Dd231F1da170': 'ccrvFRAX',
+    '0x27403b2756e9c2f436fb13e0b188dd231f1da170': 'ccrvFRAX',
+    '0x29127fe04ffa4c32acac0ffe17280abd74eac313': 'SIFU',
+    '0xd5147bc8e386d91cc5dbe72099dac6c9b99276f5': 'renFIL'
 }
 
 """
@@ -64,6 +70,8 @@ EVENT_SIGNATURES = {
     'Aave_v3_liquidations' : 'LiquidationCall(address,address,address,uint256,uint256,address,bool)',
     # https://github.com/aave/aave-protocol/blob/4b4545fb583fd4f400507b10f3c3114f45b8a037/contracts/lendingpool/LendingPool.sol#L215
     'Aave_v1_liquidations' : 'LiquidationCall(address,address,address,uint256,uint256,uint256,address,bool,uint256)',
+    # https://github.com/aave/protocol-v2/blob/baeb455fad42d3160d571bd8d3a795948b72dd85/contracts/interfaces/ILendingPool.sol#L107
+    'Aave_v2_flashloans' : 'FlashLoan(address,address,address,uint256,uint256,uint16)',
     # https://docs.makerdao.com/miscellaneous/liquidations-1.2-system-deprecated/cat-detailed-documentation
     'Maker_v1_Bite': 'Bite(bytes32,address,uint256,uint256,uint256,address,uint256)',
 }

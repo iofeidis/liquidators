@@ -8,18 +8,23 @@ print(f"Node is connected : {w3.isConnected()}")
 
 START_BLOCK = 8000000
 # Check what JSON-RPC thinks as the latest block number
-END_BLOCK = 14050000
-FILE = "results/maker_v1_bite.csv"
-HEADER = "transactionHash,vaultAddress,collateralAsset,debtDAI,blockNumber"
-EVENT_NAME = 'Maker_v1_Bite'
+END_BLOCK = 15800000
+FILE = "results/aave_v2_flashloans.csv"
+HEADER = "transactionHash,initiator,asset,amount,blockNumber"
+# HEADER = "transactionHash,userLiquidated,collateralAsset,debtAsset," + \
+#         "liquidator,debtToCover,liquidatedCollateralAmount,blockNumber"
+
+# EVENT_NAME = 'Aave_v3_liquidations'
+EVENT_NAME = 'Aave_v2_flashloans'
+
 # EVENT_NAME = 'Kick(uint256,uint256,uint256,uint256,address,address,uint256)'
 # EVENT_NAME = 'Take(uint256,uint256,uint256,uint256,uint256,uint256,address)'
 # EVENT_NAME = 'Kick(uint256,uint256,uint256,uint256,address,address)'
 # EVENT_NAME = 'LogNote(bytes4,address,bytes32,bytes32,bytes)'
 # EVENT_NAME = 'LogTrade(uint,address,uint,address)'
-
 # EVENT_NAME = 'Bite(bytes32,address,uint256,uint256,uint256,address,uint256)'
-
+# EVENT_NAME = 'FlashLoan(address,address,address,uint256,uint8,uint256,uint16)' #aave v3 flashloan
+# EVENT_NAME = 'FlashLoan(address,address,address,uint256,uint256,uint16)'
 
 if __name__=="__main__":
 
@@ -49,11 +54,10 @@ if __name__=="__main__":
                 print(f"Querying Block: {i}")
 
             for result in results:
-                # print(result)
+                # print(get_event_values(result, 'Aave_v2_flashloans'))
                 # exit()
                 result_dict = get_event_values(result, EVENT_NAME)
                 spamwriter.writerow(result_dict.values())
-                # exit()
                 
     if EVENT_NAME == 'Maker_v1_Bite':
         # Add liquidators for each transaction
