@@ -6,16 +6,17 @@ import pandas as pd
 
 print(f"Node is connected : {w3.isConnected()}")
 
-START_BLOCK = 8000000
+START_BLOCK = 11000000
 # Check what JSON-RPC thinks as the latest block number
 END_BLOCK = 15800000
-FILE = "results/aave_v2_flashloans.csv"
-HEADER = "transactionHash,initiator,asset,amount,blockNumber"
-# HEADER = "transactionHash,userLiquidated,collateralAsset,debtAsset," + \
-#         "liquidator,debtToCover,liquidatedCollateralAmount,blockNumber"
+FILE = "results/compound_v2_liquidations.csv"
+# HEADER = "transactionHash,initiator,asset,amount,blockNumber"
+HEADER = "transactionHash,userLiquidated,collateralAsset," + \
+        "liquidator,debtToCover,liquidatedCollateralAmount,blockNumber"
 
 # EVENT_NAME = 'Aave_v3_liquidations'
-EVENT_NAME = 'Aave_v2_flashloans'
+# EVENT_NAME = 'Aave_v2_flashloans'
+EVENT_NAME = 'Compound_v2_liquidations'
 
 # EVENT_NAME = 'Kick(uint256,uint256,uint256,uint256,address,address,uint256)'
 # EVENT_NAME = 'Take(uint256,uint256,uint256,uint256,uint256,uint256,address)'
@@ -23,8 +24,9 @@ EVENT_NAME = 'Aave_v2_flashloans'
 # EVENT_NAME = 'LogNote(bytes4,address,bytes32,bytes32,bytes)'
 # EVENT_NAME = 'LogTrade(uint,address,uint,address)'
 # EVENT_NAME = 'Bite(bytes32,address,uint256,uint256,uint256,address,uint256)'
-# EVENT_NAME = 'FlashLoan(address,address,address,uint256,uint8,uint256,uint16)' #aave v3 flashloan
-# EVENT_NAME = 'FlashLoan(address,address,address,uint256,uint256,uint16)'
+# EVENT_NAME = 'LiquidateBorrow(address,address,uint256,address,uint256)'
+# EVENT_NAME = 'BorrowLiquidated(address,address,uint256,uint256,uint256,uint256,address,address,uint256,uint256,uint256,uint256)'
+# EVENT_NAME = 'SupplyReceived(address,address,uint256,uint256,uint256)'
 
 if __name__=="__main__":
 
@@ -54,7 +56,7 @@ if __name__=="__main__":
                 print(f"Querying Block: {i}")
 
             for result in results:
-                # print(get_event_values(result, 'Aave_v2_flashloans'))
+                # print(result)
                 # exit()
                 result_dict = get_event_values(result, EVENT_NAME)
                 spamwriter.writerow(result_dict.values())
