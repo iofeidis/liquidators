@@ -195,6 +195,8 @@ EVENT_SIGNATURES = {
     'Aave_v2_flashloans' : 'FlashLoan(address,address,address,uint256,uint256,uint16)',
     # https://docs.makerdao.com/miscellaneous/liquidations-1.2-system-deprecated/cat-detailed-documentation
     'Maker_v1_Bite': 'Bite(bytes32,address,uint256,uint256,uint256,address,uint256)',
+    # https://github.com/makerdao/dss/blob/17187f7d47be2f4c71d218785e1155474bbafe8a/src/dog.sol#L89
+    'Maker_v2_Bark': 'Bark(bytes32,address,uint256,uint256,uint256,address,uint256)', 
     # https://github.com/compound-finance/compound-money-market/blob/241541a62d0611118fb4e7eb324ac0f84bb58c48/contracts/MoneyMarket.sol#L169
     'Compound_v1_liquidations': 'BorrowLiquidated(address,address,uint256,uint256,uint256,uint256,address,address,uint256,uint256,uint256,uint256)',
     # https://github.com/compound-finance/compound-protocol/blob/a3214f67b73310d547e00fc578e8355911c9d376/contracts/CTokenInterfaces.sol#L149

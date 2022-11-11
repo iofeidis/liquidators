@@ -1,7 +1,7 @@
 import pandas as pd
 from web3.auto import w3
 
-FILE = "results/compound_v2_liquidations.csv"
+FILE = "results/maker_v2_bark.csv"
 
 df = pd.read_csv(FILE)
 
@@ -21,4 +21,4 @@ df['dates'] = pd.to_datetime(df['timestamps'], unit='s', utc=True).astype('datet
 
 df.drop(columns=['timestamps'], axis=1, inplace=True)
 
-df.to_csv("results/compound_v2_liquidations.csv", index=False)
+df.to_csv("results/maker_v2_bark.csv", index=False)

@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 #%%
-FILE = "../results/aave_liquidations.csv"
+FILE = "../results/maker_v2_bark.csv"
 
 df = pd.read_csv(FILE)
 
@@ -60,7 +60,7 @@ df_transactions['Date(UTC)'] = pd.to_datetime(df_transactions['Date(UTC)'])
 df_anns = pd.read_csv("../utils/announcements.csv")
 
 # Querying only transactions after October 2020
-df_transactions = df_transactions.query('UnixTimeStamp > 1604171711')
+df_transactions = df_transactions.query('UnixTimeStamp > 1539909857')
 
 ax = df_transactions.plot(x="Date(UTC)", y="Value")
 
@@ -71,13 +71,16 @@ for i in pd.to_datetime(df_anns.anns.values):
 plt.xlabel("Time")
 plt.ylabel("# of Daily Transactions")
 
-# plt.savefig('transactions.jpg', dpi=200, bbox_inches='tight')
-plt.show()
+plt.savefig('../results/figures/transactions.jpg', dpi=200, bbox_inches='tight')
+# plt.show()
 
 # %%
 ###### Events vs Announcements ######
 df['dates'] = pd.to_datetime(df['dates'], utc=True)
 ax = df.groupby(df.dates.dt.date).size().plot(x_compat = True)
+
+# Dates of Announcements
+df_anns = pd.read_csv("../utils/announcements.csv")
 
 # Adding vertical lines for the Announcements
 for i in pd.to_datetime(df_anns.anns.values):
@@ -87,8 +90,8 @@ plt.xlabel("Time")
 plt.ylabel("# of Events")
 plt.xticks(rotation=90)
 
-# plt.savefig('../results/Aave_Liquidations_vs_Announcements.jpg', dpi=200, bbox_inches='tight')
-plt.show()
+plt.savefig('../results/Maker_v2_Liquidations_vs_Announcements.jpg', dpi=200, bbox_inches='tight')
+# plt.show()
 
 
 
@@ -190,5 +193,28 @@ plt.legend(['Transactions','Announcements'])
 plt.savefig(f'../results/figures/{OUTPUT}.jpg', dpi=200, bbox_inches='tight')
 # plt.show()
 
+
+# %%
+######### TVL DeFi vs Announcements ########
+
+# Downloaded from https://defillama.com/
+df_tvl = pd.read_json("../utils/data/tvl.json")
+df_tvl = df_tvl.query("date > '2020-01-01'")
+df_tvl.plot.line(x='date', y='totalLiquidityUSD')
+
+# Dates of Announcements
+df_anns = pd.read_csv("../utils/announcements.csv")
+
+# # Adding vertical lines for the Announcements
+for i in pd.to_datetime(df_anns.anns.values):
+    plt.axvline(x=i, color='red', linewidth=0.4, linestyle='--')
+
+plt.xlabel("Time")
+plt.ylabel("Total Value Lock (USD)")
+# plt.xticks(rotation=90)
+plt.legend(['TVL','Announcements'])
+    
+plt.savefig(f'../results/figures/TVL.jpg', dpi=200, bbox_inches='tight')
+# plt.show()
 
 # %%
