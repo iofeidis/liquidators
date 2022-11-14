@@ -5,12 +5,13 @@ import json
 with open("utils/asset_addresses.json", 'r') as jsonfile:
     ASSET_ADDRESSES = json.load(jsonfile)
 
-def get_aave_event(result, event_name):
+def get_aave_event(result=None, event_name="Maker_v1_Bite", return_header=False):
     # Same as Aave v2 liquidations
     if event_name == 'Aave_v3_liquidations':
         
-        # HEADER = "transactionHash,userLiquidated,collateralAsset,debtAsset," + \
-        # "liquidator,debtToCover,liquidatedCollateralAmount,blockNumber"
+        if return_header:
+            return "transactionHash,userLiquidated,collateralAsset,debtAsset," + \
+                "liquidator,debtToCover,liquidatedCollateralAmount,blockNumber"
         
         collateral_asset = '0x' + result["topics"][1].hex().lstrip('0x').rjust(40,'0')
         debt_asset = '0x' + result["topics"][2].hex().lstrip('0x').rjust(40,'0')
@@ -27,6 +28,10 @@ def get_aave_event(result, event_name):
         }
     elif event_name == 'Aave_v1_liquidations':
         
+        if return_header:
+            return "transactionHash,userLiquidated,collateralAsset,debtAsset," + \
+                "liquidator,debtToCover,liquidatedCollateralAmount,blockNumber"
+        
         collateral_asset = '0x' + result["topics"][1].hex().lstrip('0x').rjust(40,'0')
         debt_asset = '0x' + result["topics"][2].hex().lstrip('0x').rjust(40,'0')
         
@@ -42,14 +47,15 @@ def get_aave_event(result, event_name):
         }
     elif event_name == 'Aave_v2_flashloans':
         
-        # HEADER = "transactionHash,initiator,asset,amount,blockNumber"
+        if return_header:
+            return "transactionHash,initiator,asset,amount,blockNumber"
         
         asset = '0x' + result["topics"][3].hex().lstrip('0x').rjust(40,'0')
         
         result_dict = {
             'transactionHash' : result["transactionHash"].hex(),
             'initiator': '0x' + result["topics"][2].hex().lstrip('0x').rjust(40,'0'),
-            'asset': ASSET_ADDRESSES[asset],
+            'asset': ASSET_ADDRESSES[asset] if asset in ASSET_ADDRESSES.keys() else asset,
             'amount': int(result["data"][0:66], base=16),
             'blockNumber': result["blockNumber"],
         }

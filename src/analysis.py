@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 #%%
-FILE = "../results/maker_v2_bark.csv"
+FILE = "../results/liquity_liquidations.csv"
 
 df = pd.read_csv(FILE)
 
@@ -90,7 +90,7 @@ plt.xlabel("Time")
 plt.ylabel("# of Events")
 plt.xticks(rotation=90)
 
-plt.savefig('../results/Maker_v2_Liquidations_vs_Announcements.jpg', dpi=200, bbox_inches='tight')
+plt.savefig('../results/Liquity_Liquidations_vs_Announcements.jpg', dpi=200, bbox_inches='tight')
 # plt.show()
 
 

@@ -5,11 +5,12 @@ import json
 with open("utils/asset_addresses.json", 'r') as jsonfile:
     ASSET_ADDRESSES = json.load(jsonfile)
 
-def get_maker_event(result, event_name):
+def get_maker_event(result, event_name="Maker_v1_Bite", return_header=False):
     if event_name == 'Maker_v1_Bite':
         
-        # HEADER = "transactionHash,userLiquidated,collateralAsset," + \
-        # "debtToCover,blockNumber,liquidator"
+        if return_header:
+            return "transactionHash,userLiquidated,collateralAsset," + \
+                "debtToCover,blockNumber"
         
         
         result_dict = {
@@ -22,9 +23,9 @@ def get_maker_event(result, event_name):
 
     elif event_name == 'Maker_v2_Bark':
         
-        # HEADER = "transactionHash,userLiquidated,collateralAsset," + \
-        # "debtToCover,blockNumber,liquidator"
-        
+        if return_header:
+            return "transactionHash,userLiquidated,collateralAsset," + \
+                "debtToCover,blockNumber"
         
         result_dict = {
             'transactionHash' : result["transactionHash"].hex(),

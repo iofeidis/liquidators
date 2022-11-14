@@ -201,6 +201,8 @@ EVENT_SIGNATURES = {
     'Compound_v1_liquidations': 'BorrowLiquidated(address,address,uint256,uint256,uint256,uint256,address,address,uint256,uint256,uint256,uint256)',
     # https://github.com/compound-finance/compound-protocol/blob/a3214f67b73310d547e00fc578e8355911c9d376/contracts/CTokenInterfaces.sol#L149
     'Compound_v2_liquidations': 'LiquidateBorrow(address,address,uint256,address,uint256)',
+    # https://github.com/liquity/beta/blob/8252f7b460f2c1fb987f1dfbe9ab60c6dd1aaaac/contracts/TroveManager.sol#L192 
+    'Liquity_liquidations': 'TroveLiquidated(address,uint256,uint256,uint8)',
 }
 
 if __name__=="__main__":

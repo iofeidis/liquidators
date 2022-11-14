@@ -5,12 +5,14 @@ import json
 with open("utils/asset_addresses.json", 'r') as jsonfile:
     ASSET_ADDRESSES = json.load(jsonfile)
 
-def get_compound_event(result, event_name):
+def get_compound_event(result, event_name="Compound_v2_liquidations", return_header=False):
     if event_name == 'Compound_v1_liquidations':
         
-        # HEADER = "transactionHash,userLiquidated,collateralAsset,debtAsset," + \
-        # "liquidator,debtToCover,liquidatedCollateralAmount,blockNumber"
+        if return_header:
+            return "transactionHash,userLiquidated,collateralAsset,debtAsset," + \
+                "liquidator,debtToCover,liquidatedCollateralAmount,blockNumber"
         
+
         collateral_asset = '0x' + result["data"][474:514]
         debt_asset = '0x' + result["data"][90:130]
         
@@ -26,9 +28,10 @@ def get_compound_event(result, event_name):
         }
     elif event_name == 'Compound_v2_liquidations':
         
-        # HEADER = "transactionHash,userLiquidated,collateralAsset," + \
-        # "liquidator,debtToCover,liquidatedCollateralAmount,blockNumber"
-        
+        if return_header:
+            return "transactionHash,userLiquidated,collateralAsset," + \
+                "liquidator,debtToCover,liquidatedCollateralAmount,blockNumber"
+
         collateral_asset = '0x' + result["data"][218:258]
         
         result_dict = {
