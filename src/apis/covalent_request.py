@@ -4,14 +4,13 @@ import time
 
 
 if __name__ == "__main__":
-
     COVALENT_API_KEY = "ckey_a1e61633400a49bdaffd08459af"
     ADDRESS = "0x39c6b3e42d6a679d7d776778fe880bc9487c2eda"
     CSV_FILE = f"results/transactions/{ADDRESS}.csv"
 
 
     ## Request Arguments
-
+    # https://www.covalenthq.com/docs/api/#/0/Get%20transactions%20for%20address/USD/1
     url_string = f'https://api.covalenthq.com/v1/1/address/{ADDRESS}/transactions_v2/'
 
     headers = {
@@ -30,8 +29,9 @@ if __name__ == "__main__":
     # Covalent API Key
     auth=(COVALENT_API_KEY, '')
 
-    # Response dict to DataFrame
+    # Initialize DataFrame
     df = pd.DataFrame({})
+    
 
     ## Iterate over result pages
     while True:
@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
         # Keep only data from the response
         items = response_dict['data']['items']
-
+        
         # Response dict to DataFrame
         df1 = pd.DataFrame(items)
 

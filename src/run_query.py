@@ -8,14 +8,14 @@ START_BLOCK = 7000000
 END_BLOCK = 15960000
 
 EVENTS = [
-          'Aave_v1_liquidations'
+        #   'Aave_v1_liquidations'
         #   'Aave_v3_liquidations',
         #   'Aave_v2_flashloans',
         #   'Compound_v2_liquidations',
         #   'Compound_v1_liquidations',
         #   'Maker_v1_Bite',
         #   'Maker_v2_Bark',
-        #   'Liquity_liquidations'
+          'Liquity_liquidations'
           ]
 
 # EVENT_NAME = 'Kick(uint256,uint256,uint256,uint256,address,address,uint256)'
@@ -41,15 +41,18 @@ if __name__=="__main__":
         
         print(f"Current event: {event_name}")
         
-        filepath = f"results/events/{event_name}.csv"
+        FILEPATH = f"results/events/{event_name}.csv"
+        
+        ## DEBUG
+        # FILEPATH = f"results/events/test.csv"
     
         # Run the query and save the result to filepath
-        run_query(filepath=filepath, start_block=START_BLOCK,
+        run_query(filepath=FILEPATH, start_block=START_BLOCK,
                 end_block=END_BLOCK, event_name=event_name)
 
         print("Done run_query")
         
         # Add dates to query result
-        add_dates_to_csv(filepath=filepath)
+        add_dates_to_csv(filepath=FILEPATH)
         
     

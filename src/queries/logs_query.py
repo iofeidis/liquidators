@@ -1,7 +1,7 @@
 from web3.auto import w3
 import csv
 import json
-from event_specifics import get_event_values
+from events.event_specifics import get_event_values
 import pandas as pd
 
 
