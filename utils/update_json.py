@@ -187,20 +187,31 @@ Event signatures retrieved by the corresponding smart contract
 Please name the events with the format : <protocol>_<version>_<event>
 """
 EVENT_SIGNATURES = {
+    ## AAVE
     # https://github.com/aave/aave-v3-core/blob/e46341caf815edc268893f4f9398035f242375d9/contracts/interfaces/IPool.sol#L178
     'Aave_v3_liquidations' : 'LiquidationCall(address,address,address,uint256,uint256,address,bool)',
     # https://github.com/aave/aave-protocol/blob/4b4545fb583fd4f400507b10f3c3114f45b8a037/contracts/lendingpool/LendingPool.sol#L215
     'Aave_v1_liquidations' : 'LiquidationCall(address,address,address,uint256,uint256,uint256,address,bool,uint256)',
     # https://github.com/aave/protocol-v2/blob/baeb455fad42d3160d571bd8d3a795948b72dd85/contracts/interfaces/ILendingPool.sol#L107
     'Aave_v2_flashloans' : 'FlashLoan(address,address,address,uint256,uint256,uint16)',
+    # https://github.com/aave/aave-protocol/blob/4b4545fb583fd4f400507b10f3c3114f45b8a037/contracts/lendingpool/LendingPool.sol#L38
+    'Aave_v1_deposits' : 'Deposit(address,address,uint256,uint16,uint256)',
+    # https://github.com/aave/protocol-v2/blob/0829f97c5463f22087cecbcb26e8ebe558592c16/contracts/interfaces/ILendingPool.sol#L9
+    'Aave_v2_deposits' : 'Deposit(address,address,address,uint256,uint16)',
+    
+    ## MAKER
     # https://docs.makerdao.com/miscellaneous/liquidations-1.2-system-deprecated/cat-detailed-documentation
     'Maker_v1_Bite': 'Bite(bytes32,address,uint256,uint256,uint256,address,uint256)',
     # https://github.com/makerdao/dss/blob/17187f7d47be2f4c71d218785e1155474bbafe8a/src/dog.sol#L89
-    'Maker_v2_Bark': 'Bark(bytes32,address,uint256,uint256,uint256,address,uint256)', 
+    'Maker_v2_Bark': 'Bark(bytes32,address,uint256,uint256,uint256,address,uint256)',
+    
+    ## COMPOUND
     # https://github.com/compound-finance/compound-money-market/blob/241541a62d0611118fb4e7eb324ac0f84bb58c48/contracts/MoneyMarket.sol#L169
     'Compound_v1_liquidations': 'BorrowLiquidated(address,address,uint256,uint256,uint256,uint256,address,address,uint256,uint256,uint256,uint256)',
     # https://github.com/compound-finance/compound-protocol/blob/a3214f67b73310d547e00fc578e8355911c9d376/contracts/CTokenInterfaces.sol#L149
     'Compound_v2_liquidations': 'LiquidateBorrow(address,address,uint256,address,uint256)',
+    
+    ## LIQUITY
     # https://github.com/liquity/beta/blob/8252f7b460f2c1fb987f1dfbe9ab60c6dd1aaaac/contracts/TroveManager.sol#L192 
     'Liquity_liquidations': 'TroveLiquidated(address,uint256,uint256,uint8)',
 }

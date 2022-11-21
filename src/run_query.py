@@ -11,25 +11,14 @@ EVENTS = [
         #   'Aave_v1_liquidations'
         #   'Aave_v3_liquidations',
         #   'Aave_v2_flashloans',
+        #   'Aave_v1_deposits',
+          'Aave_v2_deposits',
         #   'Compound_v2_liquidations',
         #   'Compound_v1_liquidations',
         #   'Maker_v1_Bite',
         #   'Maker_v2_Bark',
-          'Liquity_liquidations'
+        #   'Liquity_liquidations'
           ]
-
-# EVENT_NAME = 'Kick(uint256,uint256,uint256,uint256,address,address,uint256)'
-# EVENT_NAME = 'Take(uint256,uint256,uint256,uint256,uint256,uint256,address)'
-# EVENT_NAME = 'Kick(uint256,uint256,uint256,uint256,address,address,uint256)'
-# EVENT_NAME = 'Take(uint256,uint256,uint256,uint256,uint256,uint256,address)'
-# EVENT_NAME = 'Kick(uint256,uint256,uint256,uint256,address,address)'
-# EVENT_NAME = 'LogNote(bytes4,address,bytes32,bytes32,bytes)'
-# EVENT_NAME = 'LogTrade(uint,address,uint,address)'
-# EVENT_NAME = 'Bite(bytes32,address,uint256,uint256,uint256,address,uint256)'
-# EVENT_NAME = 'LiquidateBorrow(address,address,uint256,address,uint256)'
-# EVENT_NAME = 'BorrowLiquidated(address,address,uint256,uint256,uint256,uint256,address,address,uint256,uint256,uint256,uint256)'
-# EVENT_NAME = 'SupplyReceived(address,address,uint256,uint256,uint256)'
-# EVENT_NAME = 'TroveLiquidated(address,uint256,uint256,uint8)'
 
 
 if __name__=="__main__":

@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 #%%
-FILE = "../results/liquity_liquidations.csv"
+EVENT_NAME = "Aave_v2_deposits"
+FILE = f"../results/events/{EVENT_NAME}.csv"
 
 df = pd.read_csv(FILE)
 
@@ -15,12 +16,13 @@ print(df.head())
 
 #%%
 #### Collateral Assets #####
+asset_name = "asset"
 
 # Print number of unique Collateral Assets
-print(f"Unique Collateral Assets: {df['collateralAsset'].nunique()}")
+print(f"Unique Collateral Assets: {df[asset_name].nunique()}")
 
 # Print all Collateral Assets and their value counts
-print(df['collateralAsset'].value_counts())
+print(df[asset_name].value_counts())
 
 #%%
 #### Borrowed Assets #####
@@ -34,12 +36,14 @@ print(df['debtAsset'].value_counts())
 # %%
 #### Liquidators #####
 
+user_name = "depositor"
+
 # Print number of unique Liquidator addresses
-print(f"Unique Liquidators: {df['liquidator'].nunique()}")
+print(f"Unique Liquidators: {df[user_name].nunique()}")
 
 # Percentage of liquidations triggered by top 50 Liquidators
 top = 50
-p = round(df['liquidator'].value_counts().head(top).sum() /
+p = round(df[user_name].value_counts().head(top).sum() /
           len(df) * 100, 4)
 print(f"% of liquidations triggered by top {top} Liquidators: {p}%")
 
@@ -90,7 +94,7 @@ plt.xlabel("Time")
 plt.ylabel("# of Events")
 plt.xticks(rotation=90)
 
-plt.savefig('../results/Liquity_Liquidations_vs_Announcements.jpg', dpi=200, bbox_inches='tight')
+plt.savefig(f'../results/figures/{EVENT_NAME}_vs_Announcements.jpg', dpi=200, bbox_inches='tight')
 # plt.show()
 
 

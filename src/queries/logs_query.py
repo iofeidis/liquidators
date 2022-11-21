@@ -5,6 +5,20 @@ from events.event_specifics import get_event_values
 import pandas as pd
 
 
+# EVENT_NAME = 'Kick(uint256,uint256,uint256,uint256,address,address,uint256)'
+# EVENT_NAME = 'Take(uint256,uint256,uint256,uint256,uint256,uint256,address)'
+# EVENT_NAME = 'Kick(uint256,uint256,uint256,uint256,address,address,uint256)'
+# EVENT_NAME = 'Take(uint256,uint256,uint256,uint256,uint256,uint256,address)'
+# EVENT_NAME = 'Kick(uint256,uint256,uint256,uint256,address,address)'
+# EVENT_NAME = 'LogNote(bytes4,address,bytes32,bytes32,bytes)'
+# EVENT_NAME = 'LogTrade(uint,address,uint,address)'
+# EVENT_NAME = 'Bite(bytes32,address,uint256,uint256,uint256,address,uint256)'
+# EVENT_NAME = 'LiquidateBorrow(address,address,uint256,address,uint256)'
+# EVENT_NAME = 'BorrowLiquidated(address,address,uint256,uint256,uint256,uint256,address,address,uint256,uint256,uint256,uint256)'
+# EVENT_NAME = 'SupplyReceived(address,address,uint256,uint256,uint256)'
+# EVENT_NAME = 'TroveLiquidated(address,uint256,uint256,uint8)'
+EVENT_NAME = 'Deposit(address,address,uint256,uint16,uint256)'
+
 def run_query(filepath: str="results/test.csv",
               start_block: int=1500000,
               end_block: int=15940000,
@@ -14,12 +28,17 @@ def run_query(filepath: str="results/test.csv",
     with open("utils/event_signatures.json", 'r') as jsonfile:
         all_signatures = json.load(jsonfile)
     event_signature = w3.keccak(text=all_signatures[event_name]).hex()
-    # event_signature = w3.keccak(text=event_name).hex()
     
     with open(filepath, 'w') as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=',',
                                 quotechar='"', quoting=csv.QUOTE_MINIMAL)
         header = get_event_values(None, event_name, return_header=True)
+        
+        ## If event_signature is in not in events provided
+        ## Just uncomment
+        # event_signature = w3.keccak(text=EVENT_NAME).hex()
+        # header = "dummy_header"
+
         spamwriter.writerow(header.split(','))
 
         # Scrape 8,000 blocks per request
