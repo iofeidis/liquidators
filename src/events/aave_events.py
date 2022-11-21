@@ -5,7 +5,7 @@ import json
 with open("utils/asset_addresses.json", 'r') as jsonfile:
     ASSET_ADDRESSES = json.load(jsonfile)
 
-def get_aave_event(result=None, event_name="Maker_v1_Bite", return_header=False):
+def get_aave_event(result=None, event_name="Aave_v1_liquidations", return_header=False):
     # Same as Aave v2 liquidations
     if event_name == 'Aave_v3_liquidations':
         
@@ -57,6 +57,34 @@ def get_aave_event(result=None, event_name="Maker_v1_Bite", return_header=False)
             'initiator': '0x' + result["topics"][2].hex().lstrip('0x').rjust(40,'0'),
             'asset': ASSET_ADDRESSES[asset] if asset in ASSET_ADDRESSES.keys() else asset,
             'amount': int(result["data"][0:66], base=16),
+            'blockNumber': result["blockNumber"],
+        }
+    elif event_name == 'Aave_v1_deposits':
+        
+        if return_header:
+            return "transactionHash,depositor,asset,amount,blockNumber"
+        
+        asset = '0x' + result["topics"][1].hex().lstrip('0x').rjust(40,'0')
+        
+        result_dict = {
+            'transactionHash' : result["transactionHash"].hex(),
+            'depositor': '0x' + result["topics"][2].hex().lstrip('0x').rjust(40,'0'),
+            'asset': ASSET_ADDRESSES[asset] if asset in ASSET_ADDRESSES.keys() else asset,
+            'amount': int(result["data"][0:66], base=16),
+            'blockNumber': result["blockNumber"],
+        }
+    elif event_name == 'Aave_v2_deposits':
+        
+        if return_header:
+            return "transactionHash,depositor,asset,amount,blockNumber"
+        
+        asset = '0x' + result["topics"][1].hex().lstrip('0x').rjust(40,'0')
+        
+        result_dict = {
+            'transactionHash' : result["transactionHash"].hex(),
+            'depositor': '0x' + result["topics"][2].hex().lstrip('0x').rjust(40,'0'),
+            'asset': ASSET_ADDRESSES[asset] if asset in ASSET_ADDRESSES.keys() else asset,
+            'amount': int(result["data"][67:], base=16),
             'blockNumber': result["blockNumber"],
         }
     else:
