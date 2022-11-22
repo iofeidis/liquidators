@@ -1,5 +1,6 @@
 import pandas as pd
 from web3.auto import w3
+from tqdm import tqdm
 
 # FILE = "results/test.csv"
 
@@ -16,10 +17,9 @@ def add_dates_to_csv(filepath: str="results/test.csv"):
 
     timestamps = []
 
-    for i in df.blockNumber:
+    print("\n##### Adding dates ######")
+    for i in tqdm(df.blockNumber):
         timestamps.append(w3.eth.get_block(i).timestamp)
-        if i % 1000 == 0:
-            print(f"Adding date to block: {i}")
 
     df['timestamps'] = timestamps
 

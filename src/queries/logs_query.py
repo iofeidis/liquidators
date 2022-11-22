@@ -3,6 +3,7 @@ import csv
 import json
 from events.event_specifics import get_event_values
 import pandas as pd
+from tqdm import tqdm
 
 
 # EVENT_NAME = 'Kick(uint256,uint256,uint256,uint256,address,address,uint256)'
@@ -42,7 +43,8 @@ def run_query(filepath: str="results/test.csv",
         spamwriter.writerow(header.split(','))
 
         # Scrape 8,000 blocks per request
-        for p, i in enumerate(range(start_block, end_block, 8000)):
+        print("\n###### Running Query #######")
+        for p, i in enumerate(tqdm(range(start_block, end_block, 8000))):
         
             params = {'fromBlock': i,
                     'toBlock': min(end_block, i + 8000),
@@ -52,8 +54,6 @@ def run_query(filepath: str="results/test.csv",
 
             # Query based on Logs
             results = w3.eth.get_logs(params)
-            if p % 50 == 0:
-                print(f"Querying Block: {i}")
 
             for result in results:
                 # print(result)
