@@ -3,7 +3,7 @@ from queries.logs_query import run_query
 from scripts.add_dates_to_csv import add_dates_to_csv
 
 
-START_BLOCK = 7000000
+START_BLOCK = 5000000
 # Check what JSON-RPC thinks as the latest block number
 END_BLOCK = 15960000
 
@@ -12,9 +12,13 @@ EVENTS = [
         #   'Aave_v3_liquidations',
         #   'Aave_v2_flashloans',
         #   'Aave_v1_deposits',
-          'Aave_v2_deposits',
+        #   'Aave_v2_deposits',
+        #   'Aave_v1_repay',
+        #   'Aave_v2_repay',
         #   'Compound_v2_liquidations',
         #   'Compound_v1_liquidations',
+          'Compound_v1_repay',
+          'Compound_v2_repay',
         #   'Maker_v1_Bite',
         #   'Maker_v2_Bark',
         #   'Liquity_liquidations'

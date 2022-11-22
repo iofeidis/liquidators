@@ -87,6 +87,38 @@ def get_aave_event(result=None, event_name="Aave_v1_liquidations", return_header
             'amount': int(result["data"][67:], base=16),
             'blockNumber': result["blockNumber"],
         }
+    elif event_name == 'Aave_v1_repay':
+        
+        if return_header:
+            return "transactionHash,user,repayer,asset,amountMinusFees,fees,borrowBalanceIncrease,blockNumber"
+        
+        asset = '0x' + result["topics"][1].hex().lstrip('0x').rjust(40,'0')
+        
+        result_dict = {
+            'transactionHash' : result["transactionHash"].hex(),
+            'user': '0x' + result["topics"][2].hex().lstrip('0x').rjust(40,'0'),
+            'repayer': '0x' + result["topics"][3].hex().lstrip('0x').rjust(40,'0'),
+            'asset': ASSET_ADDRESSES[asset] if asset in ASSET_ADDRESSES.keys() else asset,
+            'amountMinusFees': int(result["data"][:66], base=16),
+            'fees': int(result["data"][67:130], base=16),
+            'borrowBalanceIncrease': int(result["data"][131:194], base=16),
+            'blockNumber': result["blockNumber"],
+        }
+    elif event_name == 'Aave_v2_repay':
+        
+        if return_header:
+            return "transactionHash,user,repayer,asset,amount,blockNumber"
+        
+        asset = '0x' + result["topics"][1].hex().lstrip('0x').rjust(40,'0')
+        
+        result_dict = {
+            'transactionHash' : result["transactionHash"].hex(),
+            'user': '0x' + result["topics"][2].hex().lstrip('0x').rjust(40,'0'),
+            'repayer': '0x' + result["topics"][3].hex().lstrip('0x').rjust(40,'0'),
+            'asset': ASSET_ADDRESSES[asset] if asset in ASSET_ADDRESSES.keys() else asset,
+            'amount': int(result["data"], base=16),
+            'blockNumber': result["blockNumber"],
+        }
     else:
         print(f"No event found with name {event_name}")
         return

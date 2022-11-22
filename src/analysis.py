@@ -7,11 +7,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 #%%
-EVENT_NAME = "Aave_v2_deposits"
+EVENT_NAME = "Compound_v2_repay"
 FILE = f"../results/events/{EVENT_NAME}.csv"
 
 df = pd.read_csv(FILE)
-
 print(df.head())
 
 #%%
@@ -36,7 +35,7 @@ print(df['debtAsset'].value_counts())
 # %%
 #### Liquidators #####
 
-user_name = "depositor"
+user_name = "user"
 
 # Print number of unique Liquidator addresses
 print(f"Unique Liquidators: {df[user_name].nunique()}")
@@ -81,6 +80,9 @@ plt.savefig('../results/figures/transactions.jpg', dpi=200, bbox_inches='tight')
 # %%
 ###### Events vs Announcements ######
 df['dates'] = pd.to_datetime(df['dates'], utc=True)
+# Querying only transactions after October 2020
+df = df.loc[df.dates > df.dates[18000]]
+
 ax = df.groupby(df.dates.dt.date).size().plot(x_compat = True)
 
 # Dates of Announcements

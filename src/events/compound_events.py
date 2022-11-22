@@ -43,6 +43,40 @@ def get_compound_event(result, event_name="Compound_v2_liquidations", return_hea
             'liquidatedCollateralAmount' : int(result["data"][270:322], base=16),
             'blockNumber' : result["blockNumber"],
         }
+    elif event_name == 'Compound_v1_repay':
+        
+        if return_header:
+            return "transactionHash,repayer,asset," + \
+                "amount,startingBalance,newBalance,blockNumber"
+
+        asset = '0x' + result["data"][90:130]
+        
+        result_dict = {
+            'transactionHash' : result["transactionHash"].hex(),
+            'repayer' : '0x' + result["data"][26:66],
+            'asset' : ASSET_ADDRESSES[asset] if asset in ASSET_ADDRESSES.keys() else asset,
+            'amount' : int(result["data"][130:194], base=16),
+            'startingBalance' : int(result["data"][195:258], base=16),
+            'newBalance' : int(result["data"][270:322], base=16),
+            'blockNumber' : result["blockNumber"],
+        }
+    elif event_name == 'Compound_v2_repay':
+        
+        if return_header:
+            return "transactionHash,repayer,borrower," + \
+                "repayAmount,accountBorrows,totalBorrows,blockNumber"
+
+        ## No asset information in this event
+
+        result_dict = {
+            'transactionHash' : result["transactionHash"].hex(),
+            'repayer' : '0x' + result["data"][26:66],
+            'borrower': '0x' + result["data"][90:130],
+            'repayAmount' : int(result["data"][130:194], base=16),
+            'accountBorrows' : int(result["data"][195:258], base=16),
+            'totalBorrows' : int(result["data"][270:322], base=16),
+            'blockNumber' : result["blockNumber"],
+        }
     else:
         print(f"No event found with name {event_name}")
         return
