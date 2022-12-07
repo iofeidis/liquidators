@@ -8,10 +8,10 @@ START_BLOCK = 7000000
 END_BLOCK = 15960000
 
 EVENTS = [
-        #   'Aave_v1_liquidations'
-        #   'Aave_v3_liquidations',
-        #   'Aave_v2_flashloans',
-        #   'Aave_v1_deposits',
+          'Aave_v1_liquidations',
+          'Aave_v3_liquidations',
+          'Aave_v2_flashloans',
+          'Aave_v1_deposits',
         #   'Aave_v2_deposits',
         #   'Aave_v1_repay',
         #   'Aave_v2_repay',
@@ -21,7 +21,7 @@ EVENTS = [
         #   'Compound_v2_repay',
         #   'Maker_v1_Bite',
         #   'Maker_v2_Bark',
-          'Liquity_liquidations'
+        #   'Liquity_liquidations'
           ]
 
 
