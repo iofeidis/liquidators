@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 #%%
-EVENT_NAME = "Compound_v2_repay"
+EVENT_NAME = "Aave_v2_repay"
 FILE = f"../results/events/{EVENT_NAME}.csv"
 
 df = pd.read_csv(FILE)
@@ -35,7 +35,7 @@ print(df['debtAsset'].value_counts())
 # %%
 #### Liquidators #####
 
-user_name = "user"
+user_name = "repayer"
 
 # Print number of unique Liquidator addresses
 print(f"Unique Liquidators: {df[user_name].nunique()}")
@@ -223,4 +223,31 @@ plt.legend(['TVL','Announcements'])
 plt.savefig(f'../results/figures/TVL.jpg', dpi=200, bbox_inches='tight')
 # plt.show()
 
+# %%
+########## DeFi APYs vs Announcements
+
+# Dates of Announcements
+df_anns = pd.read_csv("../utils/announcements.csv")
+
+# Daily Number of Events
+df = pd.read_csv("../utils/medianAPY.csv")
+df.timestamp = pd.to_datetime(df.timestamp)
+df.plot(x="timestamp", y="medianAPY")
+
+df_anns.anns = pd.to_datetime(df_anns.anns)
+
+# Time limit
+df_anns = df_anns.query("anns > '2022-01-01'")
+
+# # Adding vertical lines for the Announcements
+for i in df_anns.anns.values:
+    plt.axvline(x=i, color='red', linewidth=0.4, linestyle='--')
+
+plt.xlabel("Time")
+plt.ylabel("Median APY")
+# plt.xticks(rotation=90)
+plt.legend(['DeFi APY','Announcements'])
+
+plt.savefig(f'../results/figures/apys.jpg', dpi=200, bbox_inches='tight')
+# plt.show()
 # %%
