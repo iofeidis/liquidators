@@ -56,6 +56,9 @@ if __name__ == "__main__":
         # Add the new data to the existing DataFrame    
         df = pd.concat([df,df1])
 
+        # We redifine indexes
+        df.index=range(0,len(df)) 
+
         # If False, no more data to show
         if response_dict['data']['pagination']['has_more'] == False:
             break
