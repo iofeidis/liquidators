@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import time
+from tqdm import tqdm
 
 
 if __name__ == "__main__":
@@ -21,7 +22,7 @@ if __name__ == "__main__":
         'quote-currency': 'USD',
         # 'format': 'CSV',
         'block-signed-at-asc': 'false',
-        'no-logs': 'true',
+        'no-logs': 'false',
         'page-size': '1000', # Default size: 100
         'page-number': 0, # 0-based
     }
@@ -46,11 +47,29 @@ if __name__ == "__main__":
         # Keep only data from the response
         items = response_dict['data']['items']
         
+
+        # Iterate through all the transactions returned from the response
+        for item_index in tqdm(range(len(items))):
+            
+            # Create Empty list
+            events_of_tx = []
+            
+            # Iterate through all the log_events in this transaction
+            for i in range(len(items[item_index]['log_events'])):
+                
+                # If this log_event has a name, add this name to the events_of_tx list
+                if items[item_index]['log_events'][i]['decoded'] != None:
+                    events_of_tx.append(items[item_index]['log_events'][i]['decoded']['name'])
+            
+            # Add the created list to the initial items dictionary
+            items[item_index]['events'] = events_of_tx
+
+
         # Response dict to DataFrame
         df1 = pd.DataFrame(items)
 
         # Keep only specific columns
-        df1 = df1[['from_address', 'to_address', 'value',
+        df1 = df1[['from_address', 'to_address', 'value', 'events',
                 'gas_spent', 'successful', 'block_height']]
         
         # Add the new data to the existing DataFrame    
