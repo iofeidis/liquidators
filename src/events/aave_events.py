@@ -119,6 +119,26 @@ def get_aave_event(result=None, event_name="Aave_v1_liquidations", return_header
             'amount': int(result["data"], base=16),
             'blockNumber': result["blockNumber"],
         }
+    elif event_name == 'Aave_v3_borrows':
+        # Same as Aave_v2_borrows
+
+        if return_header:
+            return "transactionHash,blockNumber"
+
+        result_dict = {
+            'transactionHash': result["transactionHash"].hex(),
+            'blockNumber': result["blockNumber"],
+        }
+    elif event_name == 'Aave_v3_withdraws':
+        # Same as Aave_v2_withdraws
+
+        if return_header:
+            return "transactionHash,blockNumber"
+
+        result_dict = {
+            'transactionHash': result["transactionHash"].hex(),
+            'blockNumber': result["blockNumber"],
+        }
     else:
         print(f"No event found with name {event_name}")
         return

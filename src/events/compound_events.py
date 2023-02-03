@@ -77,6 +77,77 @@ def get_compound_event(result, event_name="Compound_v2_liquidations", return_hea
             'totalBorrows' : int(result["data"][270:322], base=16),
             'blockNumber' : result["blockNumber"],
         }
+    elif event_name == 'Compound_v1_deposits':
+
+        if return_header:
+            return "transactionHash,blockNumber"
+
+        # No asset information in this event
+
+        result_dict = {
+            'transactionHash': result["transactionHash"].hex(),
+            'blockNumber': result["blockNumber"],
+        }
+
+    elif event_name == 'Compound_v2_deposits':
+
+        if return_header:
+            return "transactionHash,blockNumber"
+
+        # No asset information in this event
+
+        result_dict = {
+            'transactionHash': result["transactionHash"].hex(),
+            'blockNumber': result["blockNumber"],
+        }
+
+    elif event_name == 'Compound_v1_withdraws':
+
+        if return_header:
+            return "transactionHash,blockNumber"
+
+        # No asset information in this event
+
+        result_dict = {
+            'transactionHash': result["transactionHash"].hex(),
+            'blockNumber': result["blockNumber"],
+        }
+
+    elif event_name == 'Compound_v2_withdraws':
+
+        if return_header:
+            return "transactionHash,blockNumber"
+
+        # No asset information in this event
+
+        result_dict = {
+            'transactionHash': result["transactionHash"].hex(),
+            'blockNumber': result["blockNumber"],
+        }
+
+    elif event_name == 'Compound_v1_borrows':
+
+        if return_header:
+            return "transactionHash,blockNumber"
+
+        # No asset information in this event
+
+        result_dict = {
+            'transactionHash': result["transactionHash"].hex(),
+            'blockNumber': result["blockNumber"],
+        }
+
+    elif event_name == 'Compound_v2_borrows':
+
+        if return_header:
+            return "transactionHash,blockNumber"
+
+        # No asset information in this event
+
+        result_dict = {
+            'transactionHash': result["transactionHash"].hex(),
+            'blockNumber': result["blockNumber"],
+        }
     else:
         print(f"No event found with name {event_name}")
         return
