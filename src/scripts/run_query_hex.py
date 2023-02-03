@@ -5,7 +5,7 @@ import pandas as pd
 
 print(f"Node is connected : {w3.isConnected()}")
 
-START_BLOCK = 11000000
+START_BLOCK = 7000000
 # Check what JSON-RPC thinks as the latest block number
 END_BLOCK = 16000000
 FILE = "results/test.csv"
@@ -20,7 +20,8 @@ HEADER = "transactionHash,initiator,asset,amount,blockNumber"
 # EVENT_NAME = 'FlashLoan(address,address,address,uint256,uint8,uint256,uint16)' #aave v3 flashloan
 # EVENT_NAME = 'FlashLoan(address,address,address,uint256,uint256,uint16)'
 # EVENT_NAME = 'RepayBorrow(address,address,uint256,uint256,uint256)'
-EVENT_NAME = 'FlashLoan(address,address,address,uint256,bytes8,uint256,uint16)'
+# EVENT_NAME = 'FlashLoan(address,address,address,uint256,bytes8,uint256,uint16)'
+EVENT_NAME = 'Borrow(address,uint256,uint256,uint256)'
 
 if __name__=="__main__":
     """

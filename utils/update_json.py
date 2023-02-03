@@ -202,6 +202,10 @@ EVENT_SIGNATURES = {
     'Aave_v1_repay' : 'Repay(address,address,address,uint256,uint256,uint256,uint256)',
     # https://github.com/aave/protocol-v2/blob/0829f97c5463f22087cecbcb26e8ebe558592c16/contracts/interfaces/ILendingPool.sol#L55
     'Aave_v2_repay' : 'Repay(address,address,address,uint256)',
+    # https://github.com/aave/aave-v3-core/blob/e46341caf815edc268893f4f9398035f242375d9/contracts/interfaces/IPool.sol#L74
+    'Aave_v3_borrows': 'Borrow(address,address,address,uint256,uint256,uint256,uint16)',
+    # https://github.com/aave/aave-v3-core/blob/e46341caf815edc268893f4f9398035f242375d9/contracts/interfaces/IPool.sol#L61
+    'Aave_v3_withdraws': 'Withdraw(address,address,address,uint256)',
     
     
     ## MAKER
@@ -220,6 +224,15 @@ EVENT_SIGNATURES = {
     'Compound_v1_repay': 'BorrowRepaid(address,address,uint256,uint256,uint256)',
     # https://github.com/compound-finance/compound-protocol/blob/a3214f67b73310d547e00fc578e8355911c9d376/contracts/CTokenInterfaces.sol#L143
     'Compound_v2_repay': 'RepayBorrow(address,address,uint256,uint256,uint256)',
+    
+    # https://github.com/compound-finance/compound-money-market/blob/241541a62d0611118fb4e7eb324ac0f84bb58c48/contracts/MoneyMarket.sol#L149
+    'Compound_v1_deposits': 'SupplyReceived(address,address,uint256,uint256,uint256)',
+    'Compound_v1_withdraws': 'SupplyWithdrawn(address,address,uint256,uint256,uint256)',
+    'Compound_v1_borrows': 'BorrowTaken(address,address,uint256,uint256,uint256,uint256)',
+    # https://github.com/compound-finance/compound-protocol/blob/a3214f67b73310d547e00fc578e8355911c9d376/contracts/CTokenInterfaces.sol#L141
+    'Compound_v2_deposits': 'ReservesAdded(address,uint256,uint256)',
+    'Compound_v2_withdraws': 'ReservesReduced(address,uint256,uint256)',
+    'Compound_v2_borrows': 'Borrow(address,uint256,uint256,uint256)',
     
     
     ## LIQUITY
