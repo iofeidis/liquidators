@@ -230,9 +230,12 @@ EVENT_SIGNATURES = {
     'Compound_v1_withdraws': 'SupplyWithdrawn(address,address,uint256,uint256,uint256)',
     'Compound_v1_borrows': 'BorrowTaken(address,address,uint256,uint256,uint256,uint256)',
     # https://github.com/compound-finance/compound-protocol/blob/a3214f67b73310d547e00fc578e8355911c9d376/contracts/CTokenInterfaces.sol#L141
-    'Compound_v2_deposits': 'Mint(address,uint256,uint256)',
-    'Compound_v2_withdraws': 'Redeem(address,uint256,uint256)',
+    'Compound_v2_deposits': 'ReservesAdded(address,uint256,uint256)',
+    'Compound_v2_withdraws': 'ReservesReduced(address,uint256,uint256)',
     'Compound_v2_borrows': 'Borrow(address,uint256,uint256,uint256)',
+    # https://github.com/compound-finance/comet/blob/main/contracts/CometMainInterface.sol
+    'Compound_v3_deposits': 'Supply(address,address,uint256)',
+
     
     
     ## LIQUITY
