@@ -251,3 +251,24 @@ plt.legend(['DeFi APY','Announcements'])
 plt.savefig(f'../results/figures/apys.jpg', dpi=200, bbox_inches='tight')
 # plt.show()
 # %%
+
+
+#%%
+df = pd.read_csv("../results/events_daily_counts/Aave_deposits_total.csv")
+# df = df[df.is_Fed_Announcement == True]
+df.dates = pd.to_datetime(df.dates)
+# df = df.set_index("dates")
+df = df[df.dates > "2022-05-01"]
+
+
+
+sns.set_theme()
+g = sns.lineplot(data=df, x="dates",
+             y="count").get_figure().autofmt_xdate()
+
+# g = plt.fill_between(df.index, df.count, alpha=0.2)
+
+# sns.lineplot(data=df, x="count", hue="is_Fed_Announcement",
+#              stat="density", bins=10)
+plt.show()
+# %%

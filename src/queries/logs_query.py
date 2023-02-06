@@ -44,10 +44,10 @@ def run_query(filepath: str="results/test.csv",
 
         # Scrape 8,000 blocks per request
         print("\n###### Running Query #######")
-        for p, i in enumerate(tqdm(range(start_block, end_block, 8000))):
+        for p, i in enumerate(tqdm(range(start_block, end_block, 4000))):
         
             params = {'fromBlock': i,
-                    'toBlock': min(end_block, i + 8000),
+                    'toBlock': min(end_block, i + 4000),
                     'topics': [
                         [event_signature],]
                     }

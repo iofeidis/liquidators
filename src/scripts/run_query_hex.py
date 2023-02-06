@@ -5,7 +5,7 @@ import pandas as pd
 
 print(f"Node is connected : {w3.isConnected()}")
 
-START_BLOCK = 7000000
+START_BLOCK = 15000000
 # Check what JSON-RPC thinks as the latest block number
 END_BLOCK = 16000000
 FILE = "results/test.csv"
@@ -21,7 +21,7 @@ HEADER = "transactionHash,initiator,asset,amount,blockNumber"
 # EVENT_NAME = 'FlashLoan(address,address,address,uint256,uint256,uint16)'
 # EVENT_NAME = 'RepayBorrow(address,address,uint256,uint256,uint256)'
 # EVENT_NAME = 'FlashLoan(address,address,address,uint256,bytes8,uint256,uint16)'
-EVENT_NAME = 'Borrow(address,uint256,uint256,uint256)'
+EVENT_NAME = 'Mint(address,uint256,uint256)'
 
 if __name__=="__main__":
     """
@@ -39,10 +39,10 @@ if __name__=="__main__":
         spamwriter.writerow(HEADER.split(','))
 
         # Scrape 8,000 blocks per request
-        for p, i in enumerate(range(START_BLOCK, END_BLOCK, 8000)):
+        for p, i in enumerate(range(START_BLOCK, END_BLOCK, 1000)):
         
             params = {'fromBlock': i,
-                    'toBlock': min(END_BLOCK, i + 8000),
+                    'toBlock': min(END_BLOCK, i + 1000),
                     'topics': [
                         [event_signature],]
                     }
